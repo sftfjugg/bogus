@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 	"strings"
+	"log"
 
 	"github.com/miekg/dns"
 )
@@ -61,6 +62,7 @@ func (r *ResponseReverter) WriteMsg(res *dns.Msg) error {
 
 // Write is a wrapper that records the size of the message that gets written.
 func (r *ResponseReverter) Write(buf []byte) (int, error) {
+	log.Println("bogus write", string(buf))
 	n, err := r.ResponseWriter.Write(buf)
 	return n, err
 }
