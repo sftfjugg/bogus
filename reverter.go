@@ -2,9 +2,9 @@ package bogus
 
 import (
 	"fmt"
+	"log"
 	"net"
 	"strings"
-	"log"
 
 	"github.com/miekg/dns"
 )
@@ -70,5 +70,6 @@ func (r *ResponseReverter) Write(buf []byte) (int, error) {
 func soa(name string) dns.RR {
 	s := fmt.Sprintf("%s 60 IN SOA ns1.%s postmaster.%s 1524370381 14400 3600 604800 60", name, name, name)
 	soa, _ := dns.NewRR(s)
+	HitsCount.WithLabelValues(name).Add(1)
 	return soa
 }
