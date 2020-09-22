@@ -4,11 +4,12 @@ import (
 	"github.com/coredns/coredns/plugin"
 
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 )
 
 // Variables declared for monitoring.
 var (
-	HitsCount = prometheus.NewCounterVec(prometheus.CounterOpts{
+	HitsCount = promauto.NewCounterVec(prometheus.CounterOpts{
 		Namespace: plugin.Namespace,
 		Subsystem: "bogus",
 		Name:      "hits_count_total",
